@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
+import { User, IUser } from "../models/User";
 import jwt from "jsonwebtoken";
 
 const generateToken = (id: string) => {
   return jwt.sign({ id }, process.env.JWT_SECRET!, {
-    expiresIn: process.env.JWT_EXPIRES_IN
+    expiresIn: process.env.JWT_EXPIRES_IN as any
   });
 };
 
@@ -28,7 +28,7 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }) as IUser;
   if (!user || !(await user.comparePassword(password)))
     return res.status(401).json({ message: "Invalid credentials" });
 
