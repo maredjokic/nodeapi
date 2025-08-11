@@ -3,7 +3,7 @@ import express from 'express';
 import { connectDB } from './config/db';
 import dotenv from 'dotenv';
 import cookieParser from "cookie-parser";
-import userRoutes from './routes/userRoute';
+import authRoutes from './routes/authRoutes';
 import cors from "cors";
 // import authRoutes from "./routes/authRoutes";
 
@@ -14,13 +14,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
+  origin: "*",// "http://localhost:5173",
+  credentials: false // true
 }));
 
 const PORT = process.env.PORT || 5000;
 
-app.use('/api/users', userRoutes);
+app.use('/api/users', authRoutes);
 
 connectDB().then(() => {
   app.listen(PORT, () => {
