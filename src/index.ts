@@ -8,7 +8,7 @@ import productRoutes from "./routes/productRoutes";
 import cartRoutes from "./routes/cartRoutes";
 import { seed } from './utils/seedProducts'; // Assuming you have a utility to seed products
 import cors from "cors";
-// import authRoutes from "./routes/authRoutes";
+import { swaggerDocs } from "./config/swagger";
 
 dotenv.config();
 const app = express();
@@ -30,6 +30,7 @@ connectDB().then(async () => {
   await seed();
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
+    swaggerDocs(app, Number(PORT));
   });
 });
 
