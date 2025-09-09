@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 5000   # port na servisu
+      targetPort: 5000 # port u podu
+  type: ClusterIP # dostupan samo unutar klastera

@@ -11,13 +11,9 @@ const AppBar: React.FC = () => {
   return (
   <header className="top-0 left-0 w-full bg-gray-900 text-white shadow-md z-50">
     <nav className="container mx-auto px-4 flex items-center justify-between h-16">
-      <span className="font-bold text-xl">Company Archive</span>
+      <span className="font-bold text-xl">Store</span>
       <div className="hidden md:flex space-x-4">
         <Link to="/" className="hover:text-blue-400">Home</Link>
-        <Link to="/about" className="hover:text-blue-400">About</Link>
-        <Link to="/contact" className="hover:text-blue-400">Contact</Link>
-        <Link to="/imagetotext" className="hover:text-blue-400">Extraction</Link>
-        <Link to="/pricing" className="hover:text-blue-400">Pricing</Link>
       {!user && (
             <div className="hidden md:flex space-x-4">
               <Link to="/login" className="hover:text-blue-400">Login</Link>

@@ -1,14 +1,35 @@
+version: "3.9"
+
 services:
-  api:
+  backend:
     build: .
+    container_name: backend
     ports:
       - "5000:5000"
-    environment:
-      ENV: docker
-      DOCKER_MONGO_URI: mongodb://mongo:27017/mydb
     depends_on:
       - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydb
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
   mongo:
-    image: mongo
+    image: mongo:7.0
+    container_name: mongo
+    restart: always
     ports:
       - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
